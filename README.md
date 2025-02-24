@@ -1,6 +1,6 @@
 # Atividades_de_praticas
 
-Repositorio de atividades praticas de linguagens JavaScript
+Repositorio de atividades praticas de linguagens JavaScript para estudo pessoal, teste e treino. Atividades salvas na branch develop
 
 ## HTTP Métodos
 
