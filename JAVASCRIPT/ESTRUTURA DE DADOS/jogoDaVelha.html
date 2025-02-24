@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jogo da Velha</title>
+<style>
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 2px;
+    margin: auto;
+  }
+  .cell {
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="board" id="board">
+  <div class="cell" onclick="placeMark(0, 0)"></div>
+  <div class="cell" onclick="placeMark(0, 1)"></div>
+  <div class="cell" onclick="placeMark(0, 2)"></div>
+  <div class="cell" onclick="placeMark(1, 0)"></div>
+  <div class="cell" onclick="placeMark(1, 1)"></div>
+  <div class="cell" onclick="placeMark(1, 2)"></div>
+  <div class="cell" onclick="placeMark(2, 0)"></div>
+  <div class="cell" onclick="placeMark(2, 1)"></div>
+  <div class="cell" onclick="placeMark(2, 2)"></div>
+</div>
+
+<script>
+  let currentPlayer = 'X';
+  let board = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
+  ];
+
+  function placeMark(row, col) {
+    if (board[row][col] === '') {
+      board[row][col] = currentPlayer;
+      document.getElementById('board').children[row * 3 + col].innerText = currentPlayer;
+      checkWinner();
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
+  }
+
+  function checkWinner() {
+    // Check rows
+    for (let i = 0; i < 3; i++) {
+      if (board[i][0] !== '' && board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
+        alert(`${board[i][0]} Você ganhou!`);
+        resetBoard();
+        return;
+      }
+    }
+
+    // Check columns
+    for (let i = 0; i < 3; i++) {
+      if (board[0][i] !== '' && board[0][i] === board[1][i] && board[1][i] === board[2][i]) {
+        alert(`${board[0][i]} Você ganhou!`);
+        resetBoard();
+        return;
+      }
+    }
+
+    // Check diagonals
+    if (board[0][0] !== '' && board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+      alert(`${board[0][0]} Você ganhou!`);
+      resetBoard();
+      return;
+    }
+    if (board[0][2] !== '' && board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+      alert(`${board[0][2]} Você ganhou!`);
+      resetBoard();
+      return;
+    }
+
+    // Check for tie
+    if (!board.flat().includes('')) {
+      alert('Vamos novamente!');
+      resetBoard();
+      return;
+    }
+  }
+
+  function resetBoard() {
+    board = [
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', '']
+    ];
+    currentPlayer = 'X';
+    document.querySelectorAll('.cell').forEach(cell => cell.innerText = '');
+  }
+</script>
+
+</body>
+</html>

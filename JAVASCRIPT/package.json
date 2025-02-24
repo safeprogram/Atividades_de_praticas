@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "ads",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,8 +8,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "express": "^4.21.0"
-  }
+  "description": ""
 }
